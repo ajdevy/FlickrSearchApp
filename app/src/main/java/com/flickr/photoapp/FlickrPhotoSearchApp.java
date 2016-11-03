@@ -1,25 +1,19 @@
-package com.codepath.apps.restclienttemplate;
-
-import com.nostra13.universalimageloader.core.DisplayImageOptions;
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
-import com.raizlabs.android.dbflow.config.FlowConfig;
-import com.raizlabs.android.dbflow.config.FlowLog;
-import com.raizlabs.android.dbflow.config.FlowManager;
+package com.flickr.photoapp;
 
 import android.app.Application;
 import android.content.Context;
 
-public class FlickrClientApp extends Application {
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+
+public class FlickrPhotoSearchApp extends Application {
 	private static Context context;
 	
     @Override
     public void onCreate() {
         super.onCreate();
-        FlickrClientApp.context = this;
-
-        FlowManager.init(new FlowConfig.Builder(this).build());
-        FlowLog.setMinimumLoggingLevel(FlowLog.Level.V);
+        FlickrPhotoSearchApp.context = this;
 
         // Create global configuration and initialize ImageLoader with this configuration
         DisplayImageOptions defaultOptions = new DisplayImageOptions.Builder().
@@ -28,9 +22,5 @@ public class FlickrClientApp extends Application {
             .defaultDisplayImageOptions(defaultOptions)
             .build();
         ImageLoader.getInstance().init(config);
-    }
-    
-    public static FlickrClient getRestClient() {
-    	return (FlickrClient) FlickrClient.getInstance(FlickrClient.class, FlickrClientApp.context);
     }
 }
